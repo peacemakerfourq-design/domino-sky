@@ -1,0 +1,116 @@
+import type { NormalizedDataset } from '../domain/types'
+
+export function makeTestDataset(): NormalizedDataset {
+  return {
+    meta: {
+      dataset: 'engine-test',
+      operatingDay: '2026-01-01',
+      minTurnaroundMinutes: 30,
+      seatsPerAircraft: 200,
+      notes: [],
+    },
+    airports: [
+      {
+        id: 'AAA',
+        name: 'Alpha',
+        city: 'Alpha',
+        lat: 0,
+        lng: 0,
+        tier: 'spoke',
+        capacityPerHour: 100,
+      },
+      {
+        id: 'BBB',
+        name: 'Bravo',
+        city: 'Bravo',
+        lat: 0,
+        lng: 0,
+        tier: 'spoke',
+        capacityPerHour: 100,
+      },
+      {
+        id: 'CCC',
+        name: 'Charlie',
+        city: 'Charlie',
+        lat: 0,
+        lng: 0,
+        tier: 'spoke',
+        capacityPerHour: 100,
+      },
+    ],
+    flights: [
+      {
+        id: 'F1',
+        tailId: 'T1',
+        legOrder: 1,
+        origin: 'AAA',
+        destination: 'BBB',
+        departure: 60,
+        arrival: 120,
+        blockMinutes: 60,
+        passengers: 100,
+        turnaroundBeforeMinutes: null,
+      },
+      {
+        id: 'F2',
+        tailId: 'T1',
+        legOrder: 2,
+        origin: 'BBB',
+        destination: 'CCC',
+        departure: 150,
+        arrival: 210,
+        blockMinutes: 60,
+        passengers: 90,
+        turnaroundBeforeMinutes: 30,
+      },
+      {
+        id: 'F3',
+        tailId: 'T2',
+        legOrder: 1,
+        origin: 'AAA',
+        destination: 'CCC',
+        departure: 90,
+        arrival: 180,
+        blockMinutes: 90,
+        passengers: 80,
+        turnaroundBeforeMinutes: null,
+      },
+    ],
+    aircraft: [
+      { id: 'T1', flightIds: ['F1', 'F2'] },
+      { id: 'T2', flightIds: ['F3'] },
+    ],
+    connections: [
+      {
+        id: 'CX1',
+        airport: 'BBB',
+        fromFlightId: 'F1',
+        toFlightId: 'F2',
+        passengers: 20,
+        minConnectMinutes: 45,
+      },
+    ],
+    crews: [
+      {
+        id: 'CR1',
+        tailId: 'T1',
+        base: 'AAA',
+        dutyStart: 0,
+        maxDutyMinutes: 300,
+        flightIds: ['F1', 'F2'],
+      },
+      {
+        id: 'CR2',
+        tailId: 'T2',
+        base: 'AAA',
+        dutyStart: 0,
+        maxDutyMinutes: 300,
+        flightIds: ['F3'],
+      },
+    ],
+    spares: [
+      { id: 'SP1', base: 'AAA', availableFrom: 0, seats: 200 },
+      { id: 'SP2', base: 'BBB', availableFrom: 0, seats: 200 },
+    ],
+  }
+}
